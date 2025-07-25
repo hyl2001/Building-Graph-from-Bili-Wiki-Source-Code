@@ -1,0 +1,711 @@
+[
+    [
+        {
+            "type": "section_name",
+            "content": "TEST"
+        },
+        [
+            [
+                {
+                    "type": "template_name",
+                    "content": "剧情选项",
+                    "is_nested_temp": false
+                },
+                {
+                    "type": "template",
+                    "name": "选项1",
+                    "nested_temp_spans": [],
+                    "value": "「胆小」的守卫",
+                    "is_nested_temp": false
+                },
+                {
+                    "type": "template",
+                    "name": "剧情1",
+                    "nested_temp_spans": [
+                        [
+                            29,
+                            959
+                        ]
+                    ],
+                    "value": [
+                        "「胆小」的守卫：你…你们是什么人，你们要干什么！啊啊啊！",
+                        "$$9773918906$$"
+                    ],
+                    "is_nested_temp": false,
+                    "nested_temp": {
+                        "9773918906": [
+                            {
+                                "type": "template_name",
+                                "content": "剧情选项",
+                                "is_nested_temp": true
+                            },
+                            {
+                                "type": "template",
+                                "name": "选项1",
+                                "nested_temp_spans": [],
+                                "value": "投降吧，没人会来帮你的。",
+                                "is_nested_temp": true
+                            },
+                            {
+                                "type": "template",
+                                "name": "剧情1",
+                                "nested_temp_spans": [
+                                    [
+                                        20,
+                                        63
+                                    ],
+                                    [
+                                        101,
+                                        813
+                                    ]
+                                ],
+                                "value": [
+                                    "「胆小」的守卫：其他守卫都被打到了吗？",
+                                    "$$9216193450$$",
+                                    "「胆小」的守卫：什么？！我…我不怕，先遣队的「债务处理人」会来支援我的！",
+                                    "$$8942467357$$"
+                                ],
+                                "is_nested_temp": true,
+                                "nested_temp": {
+                                    "9216193450": [
+                                        {
+                                            "type": "template_name",
+                                            "content": "剧情选项",
+                                            "is_nested_temp": true
+                                        },
+                                        {
+                                            "type": "template",
+                                            "name": "选项1",
+                                            "nested_temp_spans": [],
+                                            "value": "没错，都被我打倒了。",
+                                            "is_nested_temp": true
+                                        },
+                                        {
+                                            "type": "template",
+                                            "name": "选项2",
+                                            "nested_temp_spans": [],
+                                            "value": "他们突然有急事回至冬国。",
+                                            "is_nested_temp": true
+                                        }
+                                    ],
+                                    "8942467357": [
+                                        {
+                                            "type": "template_name",
+                                            "content": "剧情选项",
+                                            "is_nested_temp": true
+                                        },
+                                        {
+                                            "type": "template",
+                                            "name": "选项1",
+                                            "nested_temp_spans": [],
+                                            "value": "他也被我顺手解决了。",
+                                            "is_nested_temp": true
+                                        },
+                                        {
+                                            "type": "template",
+                                            "name": "剧情1",
+                                            "nested_temp_spans": [
+                                                [
+                                                    80,
+                                                    221
+                                                ],
+                                                [
+                                                    222,
+                                                    270
+                                                ]
+                                            ],
+                                            "value": [
+                                                "「胆小」的守卫：唔…",
+                                                "「胆小」的守卫：唔……",
+                                                "「胆小」的守卫：好吧！我也实在没办法…",
+                                                "「胆小」的守卫：作为守卫，我放过你们了。",
+                                                "$$1865499329$$",
+                                                "$$5150514104$$"
+                                            ],
+                                            "is_nested_temp": true,
+                                            "nested_temp": {
+                                                "1865499329": [
+                                                    {
+                                                        "type": "template_name",
+                                                        "content": "剧情选项",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "选项1",
+                                                        "nested_temp_spans": [],
+                                                        "value": "尚未进入「贪婪」的守卫所在的房间",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "剧情1",
+                                                        "nested_temp_spans": [],
+                                                        "value": "「胆小」的守卫：但可惜，钥匙不在我这里。你们还是去找下一个人看看吧。",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "选项2",
+                                                        "nested_temp_spans": [],
+                                                        "value": "已经进入「贪婪」的守卫所在的房间",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "剧情2",
+                                                        "nested_temp_spans": [],
+                                                        "value": "「胆小」的守卫：钥匙</span>在这里…从大厅继续往前走就是了，可别说是我给你的。",
+                                                        "is_nested_temp": true
+                                                    }
+                                                ],
+                                                "5150514104": [
+                                                    {
+                                                        "type": "collapse",
+                                                        "content": "「胆小」的守卫：快，快走吧！去找别人！去！去！"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "template",
+                                            "name": "选项2",
+                                            "nested_temp_spans": [],
+                                            "value": "别指望了，根本没见这个人。",
+                                            "is_nested_temp": true
+                                        },
+                                        {
+                                            "type": "template",
+                                            "name": "剧情2",
+                                            "nested_temp_spans": [
+                                                [
+                                                    80,
+                                                    221
+                                                ],
+                                                [
+                                                    222,
+                                                    270
+                                                ]
+                                            ],
+                                            "value": [
+                                                "「胆小」的守卫：唔…",
+                                                "「胆小」的守卫：唔……",
+                                                "「胆小」的守卫：好吧！我也实在没办法…",
+                                                "「胆小」的守卫：作为守卫，我放过你们了。",
+                                                "$$1865499329$$",
+                                                "$$5150514104$$"
+                                            ],
+                                            "is_nested_temp": true,
+                                            "nested_temp": {
+                                                "1865499329": [
+                                                    {
+                                                        "type": "template_name",
+                                                        "content": "剧情选项",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "选项1",
+                                                        "nested_temp_spans": [],
+                                                        "value": "尚未进入「贪婪」的守卫所在的房间",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "剧情1",
+                                                        "nested_temp_spans": [],
+                                                        "value": "「胆小」的守卫：但可惜，钥匙不在我这里。你们还是去找下一个人看看吧。",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "选项2",
+                                                        "nested_temp_spans": [],
+                                                        "value": "已经进入「贪婪」的守卫所在的房间",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "剧情2",
+                                                        "nested_temp_spans": [],
+                                                        "value": "「胆小」的守卫：钥匙</span>在这里…从大厅继续往前走就是了，可别说是我给你的。",
+                                                        "is_nested_temp": true
+                                                    }
+                                                ],
+                                                "5150514104": [
+                                                    {
+                                                        "type": "collapse",
+                                                        "content": "「胆小」的守卫：快，快走吧！去找别人！去！去！"
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "template",
+                                            "name": "选项3",
+                                            "nested_temp_spans": [],
+                                            "value": "他在猫尾酒馆喝酒啊。",
+                                            "is_nested_temp": true
+                                        },
+                                        {
+                                            "type": "template",
+                                            "name": "剧情3",
+                                            "nested_temp_spans": [],
+                                            "value": "「胆小」的守卫：唔…<br>\n「胆小」的守卫：唔……<br>\n「胆小」的守卫：呵呵……<br>\n「胆小」的守卫：我受够了！<br>\n「胆小」的守卫：我也是至冬国光荣的一员，我是不会屈服的！",
+                                            "is_nested_temp": true
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "template",
+                                "name": "选项2",
+                                "nested_temp_spans": [],
+                                "value": "没什么可多说的，看招！",
+                                "is_nested_temp": true
+                            },
+                            {
+                                "type": "template",
+                                "name": "剧情2",
+                                "nested_temp_spans": [],
+                                "value": "「胆小」的守卫：哇…就这样开打了吗！<br>\n「胆小」的守卫：唔\n「胆小」的守卫：我也是至冬国光荣的一员，我是不会屈服的！",
+                                "is_nested_temp": true
+                            }
+                        ]
+                    }
+                },
+                {
+                    "type": "template",
+                    "name": "选项2",
+                    "nested_temp_spans": [],
+                    "value": "「贪婪」的守卫",
+                    "is_nested_temp": false
+                },
+                {
+                    "type": "template",
+                    "name": "剧情2",
+                    "nested_temp_spans": [
+                        [
+                            26,
+                            1634
+                        ]
+                    ],
+                    "value": [
+                        "「贪婪」的守卫：你…你们是什么人，怎么混进来的？！",
+                        "$$1095762459$$"
+                    ],
+                    "is_nested_temp": false,
+                    "nested_temp": {
+                        "1095762459": [
+                            {
+                                "type": "template_name",
+                                "content": "剧情选项",
+                                "is_nested_temp": true
+                            },
+                            {
+                                "type": "template",
+                                "name": "选项1",
+                                "nested_temp_spans": [],
+                                "value": "我们是蒙冬友爱协会的亲善大使。",
+                                "is_nested_temp": true
+                            },
+                            {
+                                "type": "template",
+                                "name": "剧情1",
+                                "nested_temp_spans": [
+                                    [
+                                        43,
+                                        1478
+                                    ]
+                                ],
+                                "value": [
+                                    "「贪婪」的守卫：这个…还有这种协会吗？",
+                                    "「贪婪」的守卫：你们来这里要做什么？",
+                                    "$$1324071846$$"
+                                ],
+                                "is_nested_temp": true,
+                                "nested_temp": {
+                                    "1324071846": [
+                                        {
+                                            "type": "template_name",
+                                            "content": "剧情选项",
+                                            "is_nested_temp": true
+                                        },
+                                        {
+                                            "type": "template",
+                                            "name": "选项1",
+                                            "nested_temp_spans": [],
+                                            "value": "来借天空之琴。",
+                                            "is_nested_temp": true
+                                        },
+                                        {
+                                            "type": "template",
+                                            "name": "剧情1",
+                                            "nested_temp_spans": [
+                                                [
+                                                    59,
+                                                    119
+                                                ]
+                                            ],
+                                            "value": [
+                                                "「贪婪」的守卫：…太可疑了吧，就不能用好一点的借口来骗我吗？",
+                                                "「贪婪」的守卫：那么，你们打算怎么来「借」呢？",
+                                                "$$4894301304$$",
+                                                "「贪婪」的守卫：唔…",
+                                                "「贪婪」的守卫：唔…",
+                                                "「贪婪」的守卫：呵呵……",
+                                                "「贪婪」的守卫：小鬼，真是把我看扁了啊！",
+                                                "「贪婪」的守卫：至冬国的意志如冰一般坚硬，我是不会屈服的！"
+                                            ],
+                                            "is_nested_temp": true,
+                                            "nested_temp": {
+                                                "4894301304": [
+                                                    {
+                                                        "type": "template_name",
+                                                        "content": "剧情选项",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "选项1",
+                                                        "nested_temp_spans": [],
+                                                        "value": "事成之后，五十万摩拉？",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "选项2",
+                                                        "nested_temp_spans": [],
+                                                        "value": "我们会向蒙冬友爱协会引荐你。",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "选项3",
+                                                        "nested_temp_spans": [],
+                                                        "value": "这个苹果给你吃？",
+                                                        "is_nested_temp": true
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "template",
+                                            "name": "选项2",
+                                            "nested_temp_spans": [],
+                                            "value": "当然是来做一些…亲善的事了。",
+                                            "is_nested_temp": true
+                                        },
+                                        {
+                                            "type": "template",
+                                            "name": "剧情2",
+                                            "nested_temp_spans": [
+                                                [
+                                                    81,
+                                                    888
+                                                ]
+                                            ],
+                                            "value": [
+                                                "「贪婪」的守卫：哦？呵呵，我们可以细谈一下…",
+                                                "「贪婪」的守卫：你们是为了天空之琴来的吧？",
+                                                "「贪婪」的守卫：那么，你们打算怎么来「借」呢？",
+                                                "$$8056198093$$"
+                                            ],
+                                            "is_nested_temp": true,
+                                            "nested_temp": {
+                                                "8056198093": [
+                                                    {
+                                                        "type": "template_name",
+                                                        "content": "剧情选项",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "选项1",
+                                                        "nested_temp_spans": [],
+                                                        "value": "事成之后，五十万摩拉？",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "剧情1",
+                                                        "nested_temp_spans": [
+                                                            [
+                                                                73,
+                                                                313
+                                                            ]
+                                                        ],
+                                                        "value": [
+                                                            "「贪婪」的守卫：唔…",
+                                                            "「贪婪」的守卫：唔…",
+                                                            "「贪婪」的守卫：嗯…",
+                                                            "「贪婪」的守卫：好吧！你们的好意我也不会拒绝。",
+                                                            "$$1347985480$$"
+                                                        ],
+                                                        "is_nested_temp": true,
+                                                        "nested_temp": {
+                                                            "1347985480": [
+                                                                {
+                                                                    "type": "template_name",
+                                                                    "content": "剧情选项",
+                                                                    "is_nested_temp": true
+                                                                },
+                                                                {
+                                                                    "type": "template",
+                                                                    "name": "选项1",
+                                                                    "nested_temp_spans": [],
+                                                                    "value": "尚未探查完其他三个房间",
+                                                                    "is_nested_temp": true
+                                                                },
+                                                                {
+                                                                    "type": "template",
+                                                                    "name": "剧情1",
+                                                                    "nested_temp_spans": [
+                                                                        [
+                                                                            60,
+                                                                            104
+                                                                        ]
+                                                                    ],
+                                                                    "value": [
+                                                                        "「贪婪」的守卫：作为守卫，我放过你们了。",
+                                                                        "「贪婪」的守卫：但可惜，钥匙不在我这里。你们还是去找下一个人看看吧。",
+                                                                        "$$2155590572$$"
+                                                                    ],
+                                                                    "is_nested_temp": true,
+                                                                    "nested_temp": {
+                                                                        "2155590572": [
+                                                                            {
+                                                                                "type": "collapse",
+                                                                                "content": "「贪婪」的守卫：还不离开？别连累我啊。"
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "type": "template",
+                                                                    "name": "选项2",
+                                                                    "nested_temp_spans": [],
+                                                                    "value": "已探查完其他三个房间",
+                                                                    "is_nested_temp": true
+                                                                },
+                                                                {
+                                                                    "type": "template",
+                                                                    "name": "剧情2",
+                                                                    "nested_temp_spans": [
+                                                                        [
+                                                                            36,
+                                                                            82
+                                                                        ]
+                                                                    ],
+                                                                    "value": [
+                                                                        "「贪婪」的守卫：钥匙在这里…从大厅继续往前走就是了，可别说是我给你的。",
+                                                                        "$$3906963781$$"
+                                                                    ],
+                                                                    "is_nested_temp": true,
+                                                                    "nested_temp": {
+                                                                        "3906963781": [
+                                                                            {
+                                                                                "type": "collapse",
+                                                                                "content": "「贪婪」的守卫：事成之后，可千万别赖账啊。"
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "选项2",
+                                                        "nested_temp_spans": [],
+                                                        "value": "我们会向蒙冬友爱协会引荐你。",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "剧情2",
+                                                        "nested_temp_spans": [
+                                                            [
+                                                                73,
+                                                                313
+                                                            ]
+                                                        ],
+                                                        "value": [
+                                                            "「贪婪」的守卫：唔…",
+                                                            "「贪婪」的守卫：唔…",
+                                                            "「贪婪」的守卫：嗯…",
+                                                            "「贪婪」的守卫：好吧！你们的好意我也不会拒绝。",
+                                                            "$$1347985480$$"
+                                                        ],
+                                                        "is_nested_temp": true,
+                                                        "nested_temp": {
+                                                            "1347985480": [
+                                                                {
+                                                                    "type": "template_name",
+                                                                    "content": "剧情选项",
+                                                                    "is_nested_temp": true
+                                                                },
+                                                                {
+                                                                    "type": "template",
+                                                                    "name": "选项1",
+                                                                    "nested_temp_spans": [],
+                                                                    "value": "尚未探查完其他三个房间",
+                                                                    "is_nested_temp": true
+                                                                },
+                                                                {
+                                                                    "type": "template",
+                                                                    "name": "剧情1",
+                                                                    "nested_temp_spans": [
+                                                                        [
+                                                                            60,
+                                                                            104
+                                                                        ]
+                                                                    ],
+                                                                    "value": [
+                                                                        "「贪婪」的守卫：作为守卫，我放过你们了。",
+                                                                        "「贪婪」的守卫：但可惜，钥匙不在我这里。你们还是去找下一个人看看吧。",
+                                                                        "$$2155590572$$"
+                                                                    ],
+                                                                    "is_nested_temp": true,
+                                                                    "nested_temp": {
+                                                                        "2155590572": [
+                                                                            {
+                                                                                "type": "collapse",
+                                                                                "content": "「贪婪」的守卫：还不离开？别连累我啊。"
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                },
+                                                                {
+                                                                    "type": "template",
+                                                                    "name": "选项2",
+                                                                    "nested_temp_spans": [],
+                                                                    "value": "已探查完其他三个房间",
+                                                                    "is_nested_temp": true
+                                                                },
+                                                                {
+                                                                    "type": "template",
+                                                                    "name": "剧情2",
+                                                                    "nested_temp_spans": [
+                                                                        [
+                                                                            36,
+                                                                            82
+                                                                        ]
+                                                                    ],
+                                                                    "value": [
+                                                                        "「贪婪」的守卫：钥匙在这里…从大厅继续往前走就是了，可别说是我给你的。",
+                                                                        "$$3906963781$$"
+                                                                    ],
+                                                                    "is_nested_temp": true,
+                                                                    "nested_temp": {
+                                                                        "3906963781": [
+                                                                            {
+                                                                                "type": "collapse",
+                                                                                "content": "「贪婪」的守卫：事成之后，可千万别赖账啊。"
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            ]
+                                                        }
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "选项3",
+                                                        "nested_temp_spans": [],
+                                                        "value": "这个苹果给你吃？",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "剧情3",
+                                                        "nested_temp_spans": [],
+                                                        "value": "「贪婪」的守卫：唔…<br>\n「贪婪」的守卫：唔…<br>\n「贪婪」的守卫：呵呵……<br>\n「贪婪」的守卫：小鬼，真是把我看扁了啊！<br>\n「贪婪」的守卫：至冬国的意志如冰一般坚硬，我是不会屈服的！",
+                                                        "is_nested_temp": true
+                                                    }
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "type": "template",
+                                            "name": "选项3",
+                                            "nested_temp_spans": [],
+                                            "value": "来调查你的贪污行为。",
+                                            "is_nested_temp": true
+                                        },
+                                        {
+                                            "type": "template",
+                                            "name": "剧情3",
+                                            "nested_temp_spans": [
+                                                [
+                                                    88,
+                                                    148
+                                                ]
+                                            ],
+                                            "value": [
+                                                "「贪婪」的守卫：岂有此理！哪里冒出来的小鬼，把我当傻子吗！",
+                                                "「贪婪」的守卫：你们是为了天空之琴来的吧？",
+                                                "「贪婪」的守卫：那么，你们打算怎么来「借」呢？",
+                                                "$$4894301304$$",
+                                                "「贪婪」的守卫：唔…",
+                                                "「贪婪」的守卫：唔…",
+                                                "「贪婪」的守卫：呵呵……",
+                                                "「贪婪」的守卫：小鬼，真是把我看扁了啊！",
+                                                "「贪婪」的守卫：至冬国的意志如冰一般坚硬，我是不会屈服的！"
+                                            ],
+                                            "is_nested_temp": true,
+                                            "nested_temp": {
+                                                "4894301304": [
+                                                    {
+                                                        "type": "template_name",
+                                                        "content": "剧情选项",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "选项1",
+                                                        "nested_temp_spans": [],
+                                                        "value": "事成之后，五十万摩拉？",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "选项2",
+                                                        "nested_temp_spans": [],
+                                                        "value": "我们会向蒙冬友爱协会引荐你。",
+                                                        "is_nested_temp": true
+                                                    },
+                                                    {
+                                                        "type": "template",
+                                                        "name": "选项3",
+                                                        "nested_temp_spans": [],
+                                                        "value": "这个苹果给你吃？",
+                                                        "is_nested_temp": true
+                                                    }
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                }
+                            },
+                            {
+                                "type": "template",
+                                "name": "选项2",
+                                "nested_temp_spans": [],
+                                "value": "没什么可多说的，你投降吧。",
+                                "is_nested_temp": true
+                            },
+                            {
+                                "type": "template",
+                                "name": "剧情2",
+                                "nested_temp_spans": [],
+                                "value": "「贪婪」的守卫：哼…我可不吃这一套！<br>\n「贪婪」的守卫：唔…<br>\n「贪婪」的守卫：至冬国的意志如冰一般坚硬，我是不会屈服的！",
+                                "is_nested_temp": true
+                            }
+                        ]
+                    }
+                }
+            ]
+        ]
+    ]
+]
