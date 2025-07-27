@@ -199,14 +199,14 @@ class Parse:
                  len(temp_dict['nested_temp_spans']) == 0
                  )
             if has_no_nested_temp:
+                if 'value' in temp_dict:
+                    if seq := self.__sequence_string(temp_dict['value']):
+                        temp_dict['value'] = seq
+                
                 if not temp_dict['is_nested_temp']:
-                    if 'value' in temp_dict:
-                        if seq := self.__sequence_string(temp_dict['value']):
-                            temp_dict['value'] = seq
                     expanded.append(temp_dict)
-                    return
-                else:
-                    return
+                
+                return
 
             value = temp_dict['value']
             nested_temp = {}
