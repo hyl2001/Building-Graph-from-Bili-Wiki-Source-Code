@@ -208,4 +208,8 @@ marimo/_lsp/
 __marimo__/
 
 # Manualy added
+relavent_papers/
+data/
+playground.ipynb
 code.txt
+1.dot

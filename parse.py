@@ -92,13 +92,11 @@ class ParseOptionTemplate:
             'value': content.strip(),
             'is_nested_temp': False
         }
-
         return output
 
     def _parse(self):
         """
-        ### NOTE
-        This method presumes that only the template "剧情选项"
+        *NOTE*: This method presumes that only the template "剧情选项"
         will be passed.
         """
         char = self._eat()
@@ -182,7 +180,7 @@ class Parse:
 
     def __numeric_hash(self, text: str):
         '''
-        To cope with the missing 'b' in the next method
+        To cope with the missing 'b' in MD5 in the next method
         (see `__parse_plot_option_temp` and its comments).
         '''
         hash_bytes = hashlib.sha256(text.encode()).digest()
@@ -199,15 +197,15 @@ class Parse:
                  len(temp_dict['nested_temp_spans']) == 0
                  )
             if has_no_nested_temp:
+                if 'value' in temp_dict:
+                    if seq := self.__sequence_string(temp_dict['value']):
+                        temp_dict['value'] = seq
+                
                 if not temp_dict['is_nested_temp']:
-                    if 'value' in temp_dict:
-                        if seq := self.__sequence_string(temp_dict['value']):
-                            temp_dict['value'] = seq
                     expanded.append(temp_dict)
-                    return
-                else:
-                    return
-
+                
+                return
+            
             value = temp_dict['value']
             nested_temp = {}
             string_with_replaced_temps = []
@@ -247,8 +245,7 @@ class Parse:
 
             string_with_replaced_temps.append(
                 value[slice_start:])  # append remains of the code
-            temp_dict['value'] = self.__sequence_string(
-                ''.join(string_with_replaced_temps))
+            temp_dict['value'] = self.__sequence_string(''.join(string_with_replaced_temps))
             temp_dict.update({'nested_temp': nested_temp})
             if not temp_dict['is_nested_temp']:
                 expanded.append(temp_dict)
@@ -373,14 +370,13 @@ class Parse:
         return parsed_sections
 
 if __name__ == '__main__':
-    import parse
     from json import dump
 
 
-    with open('template.txt', 'r', encoding='utf-8') as fp:
+    with open(r'scripts/template.txt', 'r', encoding='utf-8') as fp:
         code = fp.read()
 
-    p = parse.Parse(code)
+    p = Parse(code)
 
     with open('test_template.json', 'w', encoding='utf-8') as fp:
         dump(p.parse(), fp, ensure_ascii=False, indent=4)

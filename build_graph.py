@@ -4,7 +4,6 @@ import hashlib
 import random
 
 from copy import deepcopy
-from rich import print
 
 
 class GraphBuilder:
@@ -27,6 +26,8 @@ class GraphBuilder:
         else:
             speaker = '旅行者'  # If speaker not found, use "旅行者" as default.
             content = string
+        
+        content += f'_{random.randint(1000, 9999)}'
 
         # Random integer is added, considering that the potentially same speaker and talk text.
         temp_hash = hashlib.md5(string.encode() + bytes(random.randint(1000, 9999))).hexdigest()[:10]
@@ -78,9 +79,9 @@ class GraphBuilder:
     
     def __build_plot_option_graph(self, 
                                   plot_option_template: list[dict],
-                                  graph: nx.Graph | None = None,
+                                  graph: nx.DiGraph | None = None,
                                   prev_node_names: list[str] | None = None,
-                                  branch_name: str = 'None'):
+                                  branch_name: str = 'None') -> dict:
         if prev_node_names is None:
             prev_node_names: list[str] = ['START']
 
@@ -153,6 +154,7 @@ class GraphBuilder:
                 [node 
                 for (node, at_branch), (_, degree) in  node_attr_and_degree
                 if at_branch == branch_name and degree == 0]
+            # This return is for building plot option graph only.
             return {
                 'graph': graph,
                 'start': 'START',
@@ -161,9 +163,30 @@ class GraphBuilder:
         else:
             return self.__handle_component(plot_option_template)
     
-    def __handle_component(self, components: list):
+    def __warpped_build_plot_option_graph(self, components: list, is_followed_by_lines: bool):
+        graph: nx.DiGraph = self.__build_plot_option_graph(components)['graph']
+        leaf_nodes = [n for (n, degree) in graph.out_degree if degree == 0]
+
+        if is_followed_by_lines:
+            graph.add_node('END')
+            graph.add_edges_from([(node, 'END') for node in leaf_nodes])
+
+            return {
+                'graph': graph,
+                'start': 'START',
+                'end': 'END'
+            }
+        else:
+            return {
+                'graph': graph,
+                'start': 'START',
+                'end': leaf_nodes
+            }
+    
+    def __handle_component(self, components: list, *, is_followed_by_other_lines: bool = True):
         """
-        Note: this method is not well named.
+        Note: this method is not well named. The `is_followed_by_other_lines`
+        is for building plot option graph only.
         """
         if not components:
             return None
@@ -172,18 +195,13 @@ class GraphBuilder:
         return_dict = {
             'graph': None,
             'start': None,
-            'end': None,
-            # 'md5_list': None, #! For test only
-            # 'edges': None, #! For test only
+            'end': None
         }
 
         if components[0]['type'] == 'common_string':
             content = components[0]['content']
             nodes = self.__convert_str_seq_into_node_list(content, ['common_string'] * len(content))
             graph = nx.DiGraph()
-
-            # if isinstance(nodes, str):
-            #     print(f'at __handel_component common_string: node md5: {nodes}')
             graph.add_nodes_from(nodes)
 
             hash_list = list(nodes.keys())
@@ -196,22 +214,17 @@ class GraphBuilder:
             return_dict['graph'] = graph # type: ignore
             return_dict['start'] = hash_list[0] # type: ignore
             return_dict['end'] = hash_list[-1] # type: ignore
-            # return_dict['md5_list'] = md5_list # type: ignore
-            # return_dict['edges'] = list(zip(origins, destinations)) # type: ignore
 
             return return_dict
         elif components[0]['type'] == 'template_name':
-            graph_built = self.__build_plot_option_graph(components)
+            graph_built = self.__warpped_build_plot_option_graph(components, is_followed_by_other_lines)
             if graph_built:
                 return graph_built # consistent with standard return format
             else:
-                return None
+                return return_dict # All values are None.
         elif components[0]['type'] == 'collapse':
             nodes = self.__convert_str_seq_into_node_list(components[0]['content'], ['collapse'])
-            graph = nx.Graph()
-
-            # if isinstance(nodes, str):
-            #     print(f'at __handel_component collapse: node md5: {nodes}')
+            graph = nx.DiGraph()
             graph.add_nodes_from(nodes)
 
             hash_list = list(nodes.keys())
@@ -235,9 +248,13 @@ class GraphBuilder:
 
             prev_node: str = section_name
             for idx, sec_components in enumerate(section[1:]):
-                for component in sec_components:
-                    graph_dict = self.__handle_component(component)
 
+                for component_idx, component in enumerate(sec_components):
+                    if component_idx < len(sec_components):
+                        graph_dict = self.__handle_component(component, is_followed_by_other_lines=True)
+                    elif component_idx == len(sec_components):
+                        graph_dict = self.__handle_component(component, is_followed_by_other_lines=False)
+    
                     if graph_dict is not None:
                         new_G = nx.union(G, graph_dict['graph'], rename=('', ''))
 
@@ -255,11 +272,10 @@ class GraphBuilder:
 if __name__ == '__main__':
     from json import load
 
-    with open('test_template.json', 'r', encoding='utf-8') as fp:
+    with open(r'scripts\test_template.json', 'r', encoding='utf-8') as fp:
         test_temp = load(fp)
 
     builder = GraphBuilder(test_temp)
     g = builder.build()
     g = nx.relabel_nodes(g, nx.get_node_attributes(g, 'content'))
     nx.nx_pydot.to_pydot(g).write('1.dot', encoding='utf-8')
-
