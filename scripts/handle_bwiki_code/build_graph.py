@@ -264,18 +264,6 @@ class GraphBuilder:
                             new_G.add_edges_from([(prev_node, graph_dict['start'])])
                         
                         G = new_G
-                        prev_node = graph_dict['end'] # type: ignore
+                        prev_node = graph_dict['end']
 
         return G
-
-
-if __name__ == '__main__':
-    from json import load
-
-    with open(r'scripts\test_template.json', 'r', encoding='utf-8') as fp:
-        test_temp = load(fp)
-
-    builder = GraphBuilder(test_temp)
-    g = builder.build()
-    g = nx.relabel_nodes(g, nx.get_node_attributes(g, 'content'))
-    nx.nx_pydot.to_pydot(g).write('1.dot', encoding='utf-8')

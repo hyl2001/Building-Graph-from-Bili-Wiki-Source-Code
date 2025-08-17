@@ -205,11 +205,7 @@ class Parse:
                     expanded.append(temp_dict)
                 
                 return
-<<<<<<< HEAD
             
-=======
-
->>>>>>> b6b27b02b97bc834a52ca4b9a6ed2af342b7c8b6
             value = temp_dict['value']
             nested_temp = {}
             string_with_replaced_temps = []
@@ -384,4 +380,3 @@ if __name__ == '__main__':
 
     with open('test_template.json', 'w', encoding='utf-8') as fp:
         dump(p.parse(), fp, ensure_ascii=False, indent=4)
-
