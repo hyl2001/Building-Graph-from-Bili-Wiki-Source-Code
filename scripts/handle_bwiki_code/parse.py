@@ -4,12 +4,11 @@ import re
 import wikitextparser as wtp
 
 
-class ParseOptionTemplate:
+class _ParseOptionTemplate:
     """Dedicates to parse "剧情选项" templates. It should have been written with
-    libraries like `wikitextparser`. They can greatly simplify this parser and
+    libraries like `wikitextparser` which can greatly simplify this parser and
     are more convenient.
     """
-
     def __init__(self, code: str) -> None:
         self._code = code
         self._punctuators = ['{', '}', '|', '=']
@@ -17,29 +16,30 @@ class ParseOptionTemplate:
         self._start = 0
         self._end = 0
 
-    def _is_at_end(self):
-        return self._end >= len(self._code)
-
-    def _peek(self, offset: int = 0):
-        return self._code[self._end + offset]
-
-    def _advance(self):
-        self._end += 1
+    def _peek(self): # Get next character and not advance the pointer (self._end).
+        return self._code[self._end]
 
     def _eat(self):
         char = self._peek()
-        self._advance()
+        self._end += 1
 
         return char
 
     def _get_param_val(self):
         while self._peek() != '=':
-            self._advance()
+            self._end += 1
 
         param_name = self._code[self._start + 1: self._end]
         # self._start + 1 is to remove | before parameter.
+        _is_not_plot_option_temp = all((
+            param_name == '剧情选项',
+            param_name.find('选项') != -1,
+            param_name.find('剧情') != -1
+        )) # A 剧情选项 template must have one of them.
+        if _is_not_plot_option_temp:
+            raise ValueError(f'A "剧情选项" template excepted')
 
-        self._advance()  # Skip "="
+        self._end += 1  # Skip "="
         self._start = self._end
 
         nested_temp_start = None
@@ -65,18 +65,16 @@ class ParseOptionTemplate:
                     nested_temp_counter -= 1
                     pos += 2  # skip the following embrace
                 if nested_temp_counter == 0:
-                    if (nested_temp_start is not None and
-                            nested_temp_end is None):
+                    if (nested_temp_start is not None and nested_temp_end is None):
                         nested_temp_end = pos
-                        nested_temp_spans.append(
-                            (nested_temp_start, nested_temp_end))
+                        nested_temp_spans.append((nested_temp_start, nested_temp_end))
 
                         nested_temp_start = None
                         nested_temp_end = None
                     elif code[pos + 1] != '' and code[pos + 1] != '}':
                         pos += 1
                         continue
-                    else:
+                    else: # No nested template
                         break
             elif char == '|' and nested_temp_counter == 0:
                 break
@@ -99,7 +97,9 @@ class ParseOptionTemplate:
         *NOTE*: This method presumes that only the template "剧情选项"
         will be passed.
         """
-        char = self._eat()
+        char = self._peek()
+        self._end += 1
+        # Get a character of input and advance the pointer (self._end)
 
         match char:
             case space if space.isspace():
@@ -108,11 +108,11 @@ class ParseOptionTemplate:
                 return self._get_param_val()
             case '{':
                 self._is_in_template = True
-                self._advance()  # skip the following embrace.
+                self._end += 1  # skip the following embrace.
                 return None
             case char if char not in self._punctuators:
                 while self._peek() not in self._punctuators:
-                    self._advance()
+                    self._end += 1
                 return {
                     'type': 'template_name'
                             if self._is_in_template else 'common_string',
@@ -126,7 +126,7 @@ class ParseOptionTemplate:
 
     def scan(self):
         tokens = []
-        while not self._is_at_end():
+        while not (self._end >= len(self._code)):
             if token := self._parse():
                 tokens.append(token)
             self._start = self._end
@@ -152,6 +152,7 @@ class Parse:
 
     @staticmethod
     def __preprocess(code: str):
+        # TODO Handle <tabber> properly.
         return code.replace('<tabber>', '{{tabber|')\
                    .replace('</tabber>', '}}')\
                    .replace('|-|', '|')
@@ -217,40 +218,45 @@ class Parse:
                 nested_temp_string = \
                     value[nested_temp_left_pos:nested_temp_right_pos]
 
-                # 'b' is missing in the saved MD5. Re-written as the below one.
+                # Letter 'b' is missing in the saved MD5. Re-written as the below one.
                 # temp_md5 = hashlib.md5(nested_temp_string.encode()).hexdigest()[:10]
                 # string_with_replaced_temps.append(temp_md5)
 
                 temp_md5 = self.__numeric_hash(nested_temp_string)
                 string_with_replaced_temps.append(f'$${temp_md5}$$')
+            
+                parsed_nested = wtp.parse(nested_temp_string).templates
+                for t in parsed_nested:
+                    # only top-level template(s) needed
+                    if t.nesting_level != 1:
+                        continue
 
-                parser_ = ParseOptionTemplate(nested_temp_string)
-                parsed = parser_.scan()
-                is_plot_option_temp = \
-                    any(plot_option_parsing_result['type'] == 'template_name' and
-                        plot_option_parsing_result['content'] == '剧情选项'
-                        for plot_option_parsing_result in parsed)
-                if not is_plot_option_temp:
-                    for t in wtp.parse(nested_temp_string).templates:
-                        # only top-level template(s) needed
-                        if t.nesting_level == 1:
-                            parsed = self.__handle_temp(t)
-                else:
-                    for parsing_result in parsed:
-                        parsing_result.update({'is_nested_temp': True})
-                        traverse_nested_template(parsing_result)
+                    if t.name != '剧情选项':
+                        parsed_nasted = self.__handle_temp(t)
+                        # TODO Parse nested templates (if any).
+                        if parsed_nasted is not None:
+                            for result_parsed_nested in parsed_nasted:
+                                if (isinstance(result_parsed_nested, dict) and 
+                                    'is_nested_temp' in result_parsed_nested):
+                                    result_parsed_nested.update({'is_nested_temp': True}) # type: ignore
+                    else:
+                        parser_nested = _ParseOptionTemplate(nested_temp_string)
+                        parsed_nasted = parser_nested.scan()
 
-                if parsed is not None:
-                    nested_temp.update({temp_md5: parsed})
+                        for result_parsed_nested in parsed_nasted:
+                            result_parsed_nested.update({'is_nested_temp': True})
+                            traverse_nested_template(result_parsed_nested)
 
-            string_with_replaced_temps.append(
-                value[slice_start:])  # append remains of the code
+                    if parsed_nasted is not None:
+                        nested_temp.update({temp_md5: parsed_nasted})
+
+            string_with_replaced_temps.append(value[slice_start:])  # append remains of the code
             temp_dict['value'] = self.__sequence_string(''.join(string_with_replaced_temps))
             temp_dict.update({'nested_temp': nested_temp})
             if not temp_dict['is_nested_temp']:
                 expanded.append(temp_dict)
 
-        parser = ParseOptionTemplate(code)
+        parser = _ParseOptionTemplate(code)
         for d in parser.scan():
             traverse_nested_template(d)
 
@@ -270,7 +276,7 @@ class Parse:
             else:
                 nxt_slice_pos = None
 
-            left, t, right = (
+            left, temp, right = (
                 string[prev_temp_right_pos:template.span[0]],
                 self.__handle_temp(template),
                 string[template.span[1]:nxt_slice_pos] if nxt_slice_pos else string[template.span[1]:]
@@ -286,8 +292,8 @@ class Parse:
                         'content': seq
                     }])
 
-            if t is not None:
-                parts.append(t)
+            if temp is not None:
+                parts.append(temp)
 
             if right.strip() != '':
                 if seq := self.__sequence_string(right):
@@ -327,7 +333,10 @@ class Parse:
             case '颜色':
                 color, content = template.arguments
                 if color == '描述':
-                    return f'$$DESCRIPTION{content}$$'
+                    return [{
+                            'type': 'description',
+                            'content': f'$$DESCRIPTION{content}$$'
+                        }]
                 else:
                     if seq := self.__sequence_string(content.string[1:]):
                         return [{
@@ -335,6 +344,25 @@ class Parse:
                             'content': seq
                         }]
                     return None
+            case '角色对话':
+                args = template.arguments
+                name = args[1].string[1:] # Skip heading "|"
+                msg_type = args[2].string[1:]
+                content = args[3].string[1:]
+
+                if msg_type == '文本':
+                    msg_text = f'{name}：{content}'
+                elif msg_type == '表情':
+                    msg_text = f'{name}：……'
+                elif msg_type == '图片':
+                    msg_text = f'{name}：……'
+                else:
+                    raise ValueError(f'Message type not supported.')
+                
+                return [{
+                        'type': 'common_string',
+                        'content': msg_text
+                    }]
             case _:
                 raise NotImplementedError(f'{template.name} has no parsing function.')
 
@@ -370,13 +398,12 @@ class Parse:
         return parsed_sections
 
 if __name__ == '__main__':
-    from json import dump
-
-
-    with open(r'scripts/template.txt', 'r', encoding='utf-8') as fp:
+    # scripts\handle_bwiki_code\test_files\test_code_with_msg_tabber_sr.txt
+    with open(r'scripts\handle_bwiki_code\test_files\test_code_with_msg_tabber_sr.txt', 'r', encoding='utf-8') as fp:
         code = fp.read()
 
     p = Parse(code)
 
-    with open('test_template.json', 'w', encoding='utf-8') as fp:
+    from json import dump
+    with open('test.json', 'w', encoding='utf-8') as fp:
         dump(p.parse(), fp, ensure_ascii=False, indent=4)
